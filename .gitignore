@@ -1,0 +1,4 @@
+*.pyc
+.idea
+*.rdb
+*/__pycache__
