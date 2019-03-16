@@ -1,5 +1,5 @@
 from django.contrib import admin
-from. models import Scraper_data
+from scraping.models import ScraperData
 
 # Register your models here.
-admin.site.register(Scraper_data)
+admin.site.register(ScraperData)
