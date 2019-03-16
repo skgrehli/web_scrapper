@@ -4,6 +4,7 @@ import sys
 import time
 import json
 from random import randint
+from pyvirtualdisplay import Display
 from selenium import webdriver
 import csv
 
@@ -12,6 +13,8 @@ from django.conf import settings
 
 def scrape_website_data(domain, fetch_url, id):
     browser = None
+    display = Display(visible=0, size=(800, 600))
+    display.start()
     try:
         browser = webdriver.Chrome()
     except Exception as error:
@@ -73,4 +76,6 @@ def scrape_website_data(domain, fetch_url, id):
                     print(e)
             if not url_link:
                 flag = False
-    browser.close()
+    browser.quit()
+    display.stop()
+
