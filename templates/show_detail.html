@@ -1,16 +1,58 @@
 
- {% extends "base.html" %}
+{% extends "base.html" %}
+
+  {% block header %}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script  src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( function () {
+      $('#example').DataTable(
+        {
+          "bJQueryUI":true,
+            "bSort":false,
+            "bPaginate":true,
+            "sPaginationType":"full_numbers",
+            "iDisplayLength": 10
+        });
+        
+    } );
+  </script>
+    {% endblock %}
+
 {% block content %}
-	<div class="container">
-  		<div class="row">
-    		<div class="main">
-    			
-    			<input type="hidden" size="50" value="" name="urls">
-      			<input type="text" size="50" value="" name="urls">
-      			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      			<button>Download</button>
-      			
-  			</div>	
-  		</div>
-	</div>
+  <div class="container">
+    <div>
+      <h4></h4>
+    </div>
+    <br/>
+    <br/>
+    <div class="container-fluid">
+      <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+              <th>DOMAIN</th>
+              <th>URLS</th>
+               
+              <th>STATUS</th>
+              <th>DOWNLOAD</th>
+               
+            </tr>
+          </thead>
+          <tbody> 
+
+            {%for url_detail in data %}          
+              <tr>
+                
+                <td>{{url_detail.domain}}</td>
+                <td>{{url_detail.url}}</td>
+                <td>{{url_detail.is_processing}}</td>
+                <td><a href="">Download</a></td>
+              </tr>
+          {%endfor %}
+          </tbody>    
+        </table>
+    </div>    
+  </div>
 {%endblock%}

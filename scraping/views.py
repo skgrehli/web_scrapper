@@ -4,9 +4,14 @@ from scraping.models import ScraperData
 
 
 def index(request):
+    
     if request.method == "POST":
-        urls = request.POST.get('urls')
-        insert = ScraperData.objects.create(urls=urls)
+
+        url = request.POST.get('url')
+      
+        domain=url.split("//")[-1].split("/")[0]
+        
+        insert = ScraperData.objects.create(url=url, domain= domain)
         insert.save()
         return render(request, "index.html", {'msg': "data succesfully saved"})
     return render(request, "index.html")
@@ -14,4 +19,8 @@ def index(request):
 
 def show_data(request):
 
-    return render(request, "show_detail.html")
+    url_data = ScraperData.objects.all()
+    return render(request, "show_detail.html",{'data':url_data})
+
+
+# domain url status
