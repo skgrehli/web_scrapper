@@ -9,6 +9,7 @@ from selenium import webdriver
 import csv
 
 from django.conf import settings
+from scraping.models import ScraperData
 
 
 def scrape_website_data(domain, fetch_url, id):
@@ -77,5 +78,8 @@ def scrape_website_data(domain, fetch_url, id):
             if not url_link:
                 flag = False
     browser.quit()
+    scraper_data  = ScraperData.objects.get(pk=id)
+    scraper_data.is_processing = False
+    scraper_data.save()
     display.stop()
 

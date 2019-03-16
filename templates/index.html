@@ -3,21 +3,18 @@
 
 
 	<div class="container">
-  		<div class="row">
-    		<div class="main">
     			<form method="POST" action=".">
+  		<div class="form-row">
     			{% csrf_token %}	
-      			<input type="text" size="50" name="url">
-      			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      			<input type="submit" name="submit" value="save">
-      			</form>
+      			<input class="form-control" type="text" size="50" name="url" placeholder="Enter url that data you want to fetch...">
+                        <br/>
+      			<input class='btn btn-primary' type="submit" name="submit" value="Fetch">
   			
-      			<br>
 
-      			<p>{{msg}}</p>
 
-  			</div>	
   		</div>
+      			</form>
+      			<p>{{msg}}</p>
 	</div>
 
 {%endblock%}

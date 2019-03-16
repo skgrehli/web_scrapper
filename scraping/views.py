@@ -15,8 +15,8 @@ def index(request):
         
         insert = ScraperData.objects.create(url=url, domain= domain)
         insert.save()
-        
-        return render(request, "index.html", {'msg': "data succesfully saved"})
+        run_scraping.delay(insert.domain, insert.url, insert.id)        
+        return render(request, "index.html", {'msg': "Data Scrapping request added Sucessfully."})
     return render(request, "index.html")
 
 
@@ -28,13 +28,9 @@ def show_data(request):
 
 # domain url status
 
-def file_download(request):
-   
-    domain = request.GET.get('domain')
-    fetch_url = request.GET.get('fetch_url')
-    id = request.GET.get('id')
-    # run_scraping.delay(domain, fetch_url, id)
-    filename = "%s_data_file_%s.csv" % (domain, str(id))
+def file_download(request, id):
+    scraper_data = ScraperData.objects.get(id=id) 
+    filename = "%s_data_file_%s.csv" % (scraper_data.domain, str(id))
     file_path = os.path.join(settings.BASE_DIR, 'output', filename)
     with open(file_path, "rb") as pdf:
         response = HttpResponse(pdf.read())
