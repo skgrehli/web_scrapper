@@ -5,5 +5,5 @@ Django==2.0.13
 kombu==4.4.0
 pytz==2018.9
 selenium==3.141.0
-urllib3==1.24.1
+urllib3==1.24.2
 vine==1.2.0
